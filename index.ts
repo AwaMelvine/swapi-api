@@ -3,24 +3,15 @@ import {
   ApolloServerPluginDrainHttpServer, ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginLandingPageDisabled, gql
 } from 'apollo-server-core';
-
 import express from 'express';
 import { createServer } from 'http';
 
-const typeDefs = gql`
-  type Book {
-    title: String
-    author: String
-  }
-  type Query {
-    books: [Book!]!
-  }
-`;
+import StarWarsAPI from "./src/datasources/Swapi";
+const resolvers = require('./src/resolvers/index');
+const typeDefs = require('./src/typeDefs/index');
 
-const resolvers = {
-  Query: {
-    books: () => [],
-  },
+export type Context = {
+  startWarsAPI: StarWarsAPI;
 };
 
 (async function startApolloServer(typeDefs: any, resolvers: any) {
@@ -29,6 +20,9 @@ const resolvers = {
   const server = new ApolloServer({
     typeDefs,
     resolvers,
+    context: () => ({
+      startWarsAPI: new StarWarsAPI(),
+    }),
     csrfPrevention: true,
     cache: 'bounded',
     plugins: [
