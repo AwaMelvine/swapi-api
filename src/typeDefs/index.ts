@@ -19,8 +19,12 @@ module.exports = gql`
     total: Int
     people: [Person!]!
   }
+  input SearchInput {
+    name: String!
+  }
   type Query {
     people: [Person!]!
     peoplePage(currentPage: Int, showing: Int): PeoplePage
+    searchPeople(input: SearchInput): [Person!]!
   }
 `;

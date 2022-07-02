@@ -27,4 +27,9 @@ export default class StarWarsAPI extends RESTDataSource {
       people: results.map(getPersonFromApiPersonResult)
     };
   }
+
+  async searchPeople(name: string) {
+    const data = await this.get(`/people/?search=${name}`);
+    return data.results.map(getPersonFromApiPersonResult);
+  }
 }
