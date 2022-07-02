@@ -6,8 +6,8 @@ module.exports = {
       const people =  await startWarsAPI.getPeople();
       return people;
     },
-    peoplePage: async (_: any, { currentPage }: any, { startWarsAPI }: Context) => {
-      const people =  await startWarsAPI.getPeoplePageData(currentPage);
+    peoplePage: async (_: any, { currentPage, showing }: { currentPage: number, showing: number }, { startWarsAPI }: Context) => {
+    const people =  await startWarsAPI.getPeoplePageData(currentPage, showing ?? 10);
       return people;
     },
   },

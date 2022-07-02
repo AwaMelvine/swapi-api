@@ -2,6 +2,8 @@ import { gql } from "apollo-server-core";
 
 module.exports = gql`
   type Person {
+    id: Int!
+    image: String!
     name: String!
     height: Int!
     mass: String!
@@ -11,11 +13,14 @@ module.exports = gql`
   type PeoplePage {
     nextPage: Int
     prevPage: Int
-    count: Int
+    """ count is the number of people per page """
+    count: Int 
+    """ total is the number of people available """
+    total: Int
     people: [Person!]!
   }
   type Query {
     people: [Person!]!
-    peoplePage(currentPage: Int): PeoplePage
+    peoplePage(currentPage: Int, showing: Int): PeoplePage
   }
 `;
