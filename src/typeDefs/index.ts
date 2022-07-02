@@ -6,9 +6,16 @@ module.exports = gql`
     height: Int!
     mass: String!
     gender: String!
-    homeword: String!
+    homeworld: String!
+  }
+  type PeoplePage {
+    nextPage: Int
+    prevPage: Int
+    count: Int
+    people: [Person!]!
   }
   type Query {
     people: [Person!]!
+    peoplePage(currentPage: Int): PeoplePage
   }
 `;
