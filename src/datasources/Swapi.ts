@@ -1,4 +1,4 @@
-import { PersonType } from "../types";
+import { PersonType, PeoplePageType } from "../types";
 import { getParamValueFromUrl } from "../utils";
 
 const { RESTDataSource } = require('apollo-datasource-rest');
@@ -21,13 +21,14 @@ export default class StarWarsAPI extends RESTDataSource {
     } as PersonType));
   }
 
-  async getPeoplePageData(pageNumber: number) {
+  async getPeoplePageData(pageNumber: number): Promise<PeoplePageType> {
     const { count, next: nextURL, previous: previousUrl, results } = await this.get(`/people/?page=${pageNumber}`);
-  
+    const nextPage = getParamValueFromUrl(nextURL, "page");
+    const prevPage = getParamValueFromUrl(previousUrl, "page");
     return {
       count,
-      nextPage: getParamValueFromUrl(nextURL, "page"),
-      prevPage: getParamValueFromUrl(previousUrl, "page"),
+      nextPage: nextPage ? Number(nextPage) : null,
+      prevPage: prevPage ? Number(prevPage) : null,
       people: results
     };
   }

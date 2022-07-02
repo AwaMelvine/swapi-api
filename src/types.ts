@@ -7,8 +7,8 @@ export type PersonType = {
 };
 
 export type PeoplePageType = {
-  nextPage: number;
-  prevPage: number;
+  nextPage: number | null;
+  prevPage: number | null;
   count: number;
   people: PersonType[];
 };
