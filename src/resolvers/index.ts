@@ -14,8 +14,8 @@ module.exports = {
       const person =  await startWarsAPI.getPersonById(personId);
       return person;
     },
-    searchPeople: async (_: any, { input }: { input: { name: string } }, { startWarsAPI }: Context) => {
-    const people =  await startWarsAPI.searchPeople(input.name);
+    searchPeople: async (_: any, { name }: { name: string }, { startWarsAPI }: Context) => {
+    const people =  await startWarsAPI.searchPeople(name);
       return people;
     },
   },
