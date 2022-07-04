@@ -10,6 +10,10 @@ module.exports = {
     const people =  await startWarsAPI.getPeoplePageData(currentPage, showing ?? 10);
       return people;
     },
+    personById: async (_: any, { personId }: { personId: number }, { startWarsAPI }: Context) => {
+      const person =  await startWarsAPI.getPersonById(personId);
+      return person;
+    },
     searchPeople: async (_: any, { input }: { input: { name: string } }, { startWarsAPI }: Context) => {
     const people =  await startWarsAPI.searchPeople(input.name);
       return people;

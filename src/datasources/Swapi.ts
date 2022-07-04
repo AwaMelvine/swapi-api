@@ -15,6 +15,11 @@ export default class StarWarsAPI extends RESTDataSource {
     return people.results.map(getPersonFromApiPersonResult);
   }
 
+  async getPersonById(personId: number) {
+    const data = await this.get(`/people/${personId}`);
+    return getPersonFromApiPersonResult(data);
+  }
+
   async getPeoplePageData(pageNumber: number, count: number): Promise<PeoplePageType> {
     const { count: total, next: nextURL, previous: previousUrl, results } = await this.get(`/people/?page=${pageNumber}`);
     const nextPage = getParamValueFromUrl(nextURL, "page");
