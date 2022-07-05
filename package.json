@@ -4,7 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec npx ts-node ./index.ts"
+    "dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec npx ts-node ./index.ts",
+    "postinstall": "tsc",
+    "start": "node build/index.js"
   },
   "dependencies": {
     "apollo-datasource-rest": "^3.6.1",
