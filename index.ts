@@ -5,6 +5,7 @@ import {
 } from 'apollo-server-core';
 import express from 'express';
 import { createServer } from 'http';
+import cors from 'cors';
 
 import StarWarsAPI from "./src/datasources/Swapi";
 const resolvers = require('./src/resolvers/index');
@@ -16,6 +17,7 @@ export type Context = {
 
 (async function startApolloServer(typeDefs: any, resolvers: any) {
   const app = express();
+  app.use(cors());
   const httpServer = createServer(app);
   const server = new ApolloServer({
     typeDefs,
