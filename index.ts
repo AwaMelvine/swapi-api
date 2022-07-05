@@ -25,7 +25,7 @@ export type Context = {
     context: () => ({
       startWarsAPI: new StarWarsAPI(),
     }),
-    csrfPrevention: true,
+    csrfPrevention: false,
     cache: 'bounded',
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
